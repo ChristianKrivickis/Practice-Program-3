@@ -25,12 +25,21 @@ namespace ConsoleApp1
             playlist.Add(s5);
 
             Display(playlist);
+        
+            playlist.Sort();
+
+            Display(playlist);
+
+            Shuffle(playlist);
+
+            Display(playlist);
+
         }
 
 
         private static void Display(List<Song> playlist)
         {
-            Console.WriteLine("{0, -20} {1, -25} {2, -10} {3, -10}", "Artist", "Song", "Duration", "Genre");
+            Console.WriteLine("\n{0, -20} {1, -25} {2, -10} {3, -10}", "Artist", "Song", "Duration", "Genre");
 
             foreach (Song song in playlist)
             {
@@ -39,5 +48,20 @@ namespace ConsoleApp1
         }
 
 
+        private static void Shuffle(List<Song> playlist)
+        {
+            Random rng = new Random();
+            int numberOfSongs = playlist.Count;
+
+            while (numberOfSongs > 1)
+            {
+                numberOfSongs--;
+                int randomNumber = rng.Next(numberOfSongs+1);
+
+                Song song = playlist[randomNumber];
+                playlist[randomNumber] = playlist[numberOfSongs];
+                playlist[numberOfSongs] = song;
+            }
+        }
     }
 }

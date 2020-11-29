@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    public class Song
+    public class Song : IComparable
     {
         // Properties
         public string Title { get; set; }
@@ -39,6 +39,20 @@ namespace ConsoleApp1
         public override string ToString()
         {
             return string.Format($"{Title} {Artist} {Duration} {MusicGenre}");
+        }
+
+        public int CompareTo(object other)
+        {
+            Song that = (Song)other;
+
+            int returnValue = this.Artist.CompareTo(that.Artist); // This will sort my artist
+
+            if (returnValue == 0)
+            {
+                returnValue = this.Title.CompareTo(that.Title); // If artist is the same, sort by title
+            }
+
+            return returnValue;
         }
     }
 
